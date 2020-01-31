@@ -6,5 +6,5 @@ $data['pw']=$_POST['pw'];
 $data['pr']=serialize($_POST['pr']);
 
 save("admin",$data);
-to("../admin.php");
+to("../admin.php?do=admin");
 ?>

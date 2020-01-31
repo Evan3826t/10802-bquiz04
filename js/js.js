@@ -7,6 +7,6 @@ function lof(x)
 // 第三題也可以用，可以先寫
 function del(table,id){
     $.post("./api/del.php",{table,id},function(res){
-        lof("admin.php");
+        location.reload();
     })
 }
