@@ -22,8 +22,20 @@ include_once ("base.php");
                 <a href="?">回首頁</a> |
                 <a href="?do=news">最新消息</a> |
                 <a href="?do=look">購物流程</a> |
-                <a href="?do=buycart">購物車</a> |
-                                <a href="?do=login">會員登入</a> |
+				<a href="?do=buycart">購物車</a> |
+				<?php
+					if(empty($_SESSION['mem'])){
+						?>
+						<a href="?do=login">會員登入</a> |
+						<?php
+					}else{
+						?>
+						<a href="./api/logout.php">登出</a> |
+						<?php
+
+					}
+				?>
+                                
                                 <a href="?do=admin">管理登入</a>
            </div>
            <marquee>
@@ -31,13 +43,36 @@ include_once ("base.php");
                 </marquee>
         　　</div>
         <div id="left" class="ct">
-        	<div style="min-height:400px;">
-        	            </div>
-                        <span>
+                <div style="min-height:400px;">
+                <div class="ww"><a href='index.php'>全部商品(<?= nums("goods",['sh'=>1]);?>)</a></div>
+                <?php
+                $row = all("type",['parent'=>0]);
+                foreach ($row as $k => $v) {
+						$chk= nums("type",["parent"=>$v['id']]);
+						$num = nums("goods",['main'=>$v['id'],"sh"=>1]);
+                        echo "<div class='ww'><a href='?type=".$v['id']."'>".$v['text']."($num)</a>";
+                        if($chk >0){
+                            $type = all("type",['parent'=>$v['id']]);
+                            foreach ($type as $t) {
+                                $tnum = nums("goods",["sub"=>$t['id'],"sh"=>1]);
+                                echo "<div class='s'><a href='?type=".$t['id']."'>".$t['text']."($tnum)</a></div>";
+                            }
+                        }
+                       
+                        echo "</div>";
+                };
+
+                ?>
+
+                
+                        
+                
+        	</div>
+                <span>
             	<div>進站總人數</div>
                 <div style="color:#f00; font-size:28px;">
                 	00005                </div>
-            </span>
+                </span>
                     </div>
         <div id="right">
         
