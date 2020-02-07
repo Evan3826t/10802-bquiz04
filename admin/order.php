@@ -13,7 +13,7 @@
     foreach ($ord as $k => $m) {
     ?>
     <tr class="pp">
-        <td class="ct"><?=$m['no']?></td>
+        <td class="ct"><a href="?do=ord_detail&id=<?=$m['id']?>"><?=$m['no']?></a></td>
         <td class="ct"><?=$m['total']?></td>
         <td class="ct"><?=$m['acc']?></td>
         <td class="ct"><?=$m['name']?></td>
